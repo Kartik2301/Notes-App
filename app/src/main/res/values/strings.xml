@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Notes App</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="info_message">"1. You can add only one\n type of file i.e. either\n\t(a) PDF OR\n\t(b) Image (jpg or png) in one entry\n" +
+                            "2. Add the title as course name +\nyear\n" +
+                            "3. Do add a detailed description "</string>
+</resources>
