@@ -65,7 +65,8 @@ public class signUpActivity extends AppCompatActivity {
                                     "SignUp unsuccessful: " + task.getException().getMessage(),
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            databaseReference.child(firebaseAuth.getUid()).setValue(Username);
+                            user user_ = new user(Username,0,0,Constants.default_img_url);
+                            databaseReference.child(firebaseAuth.getUid()).setValue(user_);
                             startActivity(new Intent(signUpActivity.this, HomeActivity.class));
                         }
                     }

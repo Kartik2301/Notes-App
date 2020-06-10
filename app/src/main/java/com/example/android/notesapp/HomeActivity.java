@@ -29,6 +29,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -81,12 +82,20 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(HomeActivity.this, MainActivity.class));
             }
         });
+
         name = (TextView) findViewById(R.id.your_name);
-        DatabaseReference m = FirebaseDatabase.getInstance().getReference("users");
+        final DatabaseReference m = FirebaseDatabase.getInstance().getReference("users");
         m.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Constants.username = dataSnapshot.child(firebaseAuth.getUid().toString()).getValue().toString();
+                Constants.id = firebaseAuth.getUid().toString();
+                user new_user = dataSnapshot.child(Constants.id).getValue(user.class);
+                Constants.username = new_user.getUsername().toString();
+                Constants.points = new_user.getPoints();
+                Constants.rank = new_user.getRank();
+                Constants.default_img_url = new_user.getImageUrl();
+                Glide.with(profile)
+                        .load(Constants.default_img_url).into(profile);
                 name.setText(Constants.username);
             }
 
@@ -96,15 +105,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+
+
+
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,profileActivity.class);
-                intent.putExtra("username",Constants.username);
+                Intent intent = new Intent(HomeActivity.this, profileActivity.class);
                 startActivity(intent);
             }
         });
-        name.setText(firebaseAuth.getUid().toString());
         search = (ImageButton) findViewById(R.id.search);
         search.setOnClickListener(new View.OnClickListener() {
             @Override

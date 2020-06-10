@@ -26,8 +26,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.15">
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:id="@+id/dp"
+            android:background="@drawable/stles"
+            android:layout_height="200dp"
             android:layout_centerHorizontal="true"
             android:src="@drawable/img3"/>
     </RelativeLayout>
@@ -88,7 +90,7 @@
             android:paddingLeft="20dp"
             android:layout_marginTop="10dp"
             android:id="@+id/mid"
-            android:paddingRight="20dp"
+            android:paddingRight="30dp"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
@@ -113,7 +115,7 @@
             android:paddingLeft="20dp"
             android:id="@+id/bottom"
             android:layout_marginTop="10dp"
-            android:paddingRight="20dp"
+            android:paddingRight="30dp"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
@@ -122,16 +124,19 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:text="Leaderboard Rank:"/>
+
             <TextView
+                android:id="@+id/rank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:textSize="18sp"
-                android:textColor="#414F7D"
-                android:id="@+id/rank"
-                android:textStyle="italic"
+                android:layout_marginTop="0dp"
                 android:fontFamily="@font/ubuntu"
-                android:text="#15"/>
+                android:text="#15"
+                android:textColor="#414F7D"
+                android:textSize="18sp"
+                android:textStyle="italic" />
         </RelativeLayout>
     </LinearLayout>
 

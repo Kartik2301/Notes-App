@@ -56,12 +56,14 @@ public class searchResultsActivity extends AppCompatActivity  {
                 data1.clear();
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
                     upload upload_ = dataSnapshot1.getValue(upload.class);
-                    if(upload_.type == Constants.IMG_UPLOAD_CATEGORY){
-                        data.add(new upload(upload_.getId(),upload_.getTitle(),upload_.getDescription(),upload_.getUrl(),upload_.getType(),upload_.getLikes(),upload_.getDate()));
-                        data1.add(new upload(upload_.getId(),upload_.getTitle(),upload_.getDescription(),upload_.getUrl(),upload_.getType(),upload_.getLikes(),upload_.getDate()));
-                    } else {
-                        data.add(new upload(upload_.getId(),upload_.title,upload_.description,Constants.pdf_icon,upload_.type,upload_.likes,upload_.date));
-                        data1.add(new upload(upload_.id,upload_.title,upload_.description,upload_.url,upload_.type,upload_.likes,upload_.date));
+                    if(upload_.getTitle().contains(search_term) || search_term.contains(upload_.getTitle())){
+                        if(upload_.type == Constants.IMG_UPLOAD_CATEGORY){
+                            data.add(new upload(upload_.getId(),upload_.getTitle(),upload_.getDescription(),upload_.getUrl(),upload_.getType(),upload_.getLikes(),upload_.getDate()));
+                            data1.add(new upload(upload_.getId(),upload_.getTitle(),upload_.getDescription(),upload_.getUrl(),upload_.getType(),upload_.getLikes(),upload_.getDate()));
+                        } else {
+                            data.add(new upload(upload_.getId(),upload_.title,upload_.description,Constants.pdf_icon,upload_.type,upload_.likes,upload_.date));
+                            data1.add(new upload(upload_.id,upload_.title,upload_.description,upload_.url,upload_.type,upload_.likes,upload_.date));
+                        }
                     }
                 }
                 adapter.notifyDataSetChanged();
