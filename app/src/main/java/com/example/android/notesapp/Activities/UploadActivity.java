@@ -14,6 +14,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.view.Menu;
@@ -25,10 +26,12 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.android.notesapp.Classes.upload;
+import com.example.android.notesapp.Classes.user;
 import com.example.android.notesapp.Constants.Constants;
 import com.example.android.notesapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -78,6 +81,9 @@ public class UploadActivity extends AppCompatActivity {
                     upload item = new upload(id,topic,desc,url_pdf,Constants.PDF_UPLOAD_CATEGORY,0,date);
                     mDatabaseReference.child(id).setValue(item);
                 }
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
+                user updated_user = new user(Constants.username,Constants.points+10,Constants.rank,Constants.default_img_url);
+                databaseReference.child(Constants.id).setValue(updated_user);
                 Toast.makeText(getApplicationContext(),"Thanks for your help", Toast.LENGTH_SHORT).show();
             }
         });
