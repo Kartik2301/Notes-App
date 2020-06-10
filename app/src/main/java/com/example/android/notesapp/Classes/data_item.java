@@ -1,10 +1,10 @@
-package com.example.android.notesapp;
+package com.example.android.notesapp.Classes;
 
 public class data_item {
-    String string;
-    String imageId;
+    public String string;
+    public String imageId;
 
-    data_item(String string, String imageId){
+    public data_item(String string, String imageId){
         this.string = string;
         this.imageId = imageId;
     }

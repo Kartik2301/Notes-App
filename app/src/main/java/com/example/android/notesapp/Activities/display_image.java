@@ -1,4 +1,4 @@
-package com.example.android.notesapp;
+package com.example.android.notesapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.widget.ImageView;
+
+import com.example.android.notesapp.R;
 
 public class display_image extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.android.notesapp;
+package com.example.android.notesapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -16,6 +14,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.notesapp.Adapters.CommentAdapter;
+import com.example.android.notesapp.Classes.comments;
+import com.example.android.notesapp.Classes.upload;
+import com.example.android.notesapp.Constants.Constants;
+import com.example.android.notesapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

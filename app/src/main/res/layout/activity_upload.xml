@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#3E3B4C"
     android:padding="10dp"
-    tools:context=".UploadActivity">
+    tools:context=".Activities.UploadActivity">
 
     <EditText
         android:layout_width="match_parent"

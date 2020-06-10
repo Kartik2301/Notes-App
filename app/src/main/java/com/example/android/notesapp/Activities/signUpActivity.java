@@ -1,10 +1,9 @@
-package com.example.android.notesapp;
+package com.example.android.notesapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,9 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.android.notesapp.Classes.user;
+import com.example.android.notesapp.Constants.Constants;
+import com.example.android.notesapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -65,7 +66,7 @@ public class signUpActivity extends AppCompatActivity {
                                     "SignUp unsuccessful: " + task.getException().getMessage(),
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            user user_ = new user(Username,0,0,Constants.default_img_url);
+                            user user_ = new user(Username,0,0, Constants.default_img_url);
                             databaseReference.child(firebaseAuth.getUid()).setValue(user_);
                             startActivity(new Intent(signUpActivity.this, HomeActivity.class));
                         }

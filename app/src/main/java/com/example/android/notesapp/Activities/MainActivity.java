@@ -1,4 +1,4 @@
-package com.example.android.notesapp;
+package com.example.android.notesapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.android.notesapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,13 +27,13 @@ public class MainActivity extends AppCompatActivity {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,signInActivity.class));
+                startActivity(new Intent(MainActivity.this, signInActivity.class));
             }
         });
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,signUpActivity.class));
+                startActivity(new Intent(MainActivity.this, signUpActivity.class));
             }
         });
         btn.setOnClickListener(new View.OnClickListener() {

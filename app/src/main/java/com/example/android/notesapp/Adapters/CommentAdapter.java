@@ -1,4 +1,4 @@
-package com.example.android.notesapp;
+package com.example.android.notesapp.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,14 +11,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
+import com.example.android.notesapp.Classes.comments;
+import com.example.android.notesapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResultsAdapter extends  ArrayAdapter{
-    ArrayList<upload> list = new ArrayList<>();
+public class CommentAdapter extends  ArrayAdapter{
+    ArrayList<comments> list = new ArrayList<>();
 
-    public ResultsAdapter(Context context, int textViewResourceId, ArrayList<upload> objects) {
+    public CommentAdapter(Context context, int textViewResourceId, ArrayList<comments> objects) {
         super(context, textViewResourceId, objects);
         list = objects;
     }
@@ -32,15 +34,11 @@ public class ResultsAdapter extends  ArrayAdapter{
 
         View v = convertView;
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        v = inflater.inflate(R.layout.item_results, null);
-        TextView textView = (TextView) v.findViewById(R.id.textView);
-        TextView textView1 = (TextView) v.findViewById(R.id.helps);
-        ImageView imageView = (ImageView) v.findViewById(R.id.imageView);
-        textView.setText(list.get(position).getTitle());
-        textView1.setText(Integer.toString(list.get(position).getLikes()));
-        Glide.with(imageView)
-                .load(list.get(position).getUrl())
-                .into(imageView);
+        v = inflater.inflate(R.layout.comment_item, null);
+        TextView textView = (TextView) v.findViewById(R.id.author);
+        TextView textView1 = (TextView) v.findViewById(R.id.content1);
+        textView.setText(list.get(position).getAuthor());
+        textView1.setText(list.get(position).getContent());
         return v;
 
     }

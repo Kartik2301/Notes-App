@@ -1,4 +1,4 @@
-package com.example.android.notesapp;
+package com.example.android.notesapp.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.android.notesapp.Classes.data_item;
 import com.example.android.notesapp.R;
-import com.example.android.notesapp.data_item;
 
 import java.util.List;
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> {

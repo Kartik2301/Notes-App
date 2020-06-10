@@ -1,9 +1,8 @@
-package com.example.android.notesapp;
+package com.example.android.notesapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
@@ -23,24 +22,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.internal.Storage;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.android.notesapp.Classes.upload;
+import com.example.android.notesapp.Constants.Constants;
+import com.example.android.notesapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -76,7 +70,7 @@ public class UploadActivity extends AppCompatActivity {
                 if(is_img_upload == 1){
                     String id = mDatabaseReference.push().getKey();
                     String date = DateFormat.getDateInstance().format(new Date());
-                    upload item = new upload(id,topic,desc,url_img,Constants.IMG_UPLOAD_CATEGORY,0,date);
+                    upload item = new upload(id,topic,desc,url_img, Constants.IMG_UPLOAD_CATEGORY,0,date);
                     mDatabaseReference.child(id).setValue(item);
                 } else if(is_pdf_upload == 1){
                     String id = mDatabaseReference.push().getKey();

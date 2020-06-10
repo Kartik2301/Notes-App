@@ -1,4 +1,4 @@
-package com.example.android.notesapp;
+package com.example.android.notesapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,13 +11,16 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.android.notesapp.Adapters.ResultsAdapter;
+import com.example.android.notesapp.Classes.upload;
+import com.example.android.notesapp.Constants.Constants;
+import com.example.android.notesapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class searchResultsActivity extends AppCompatActivity  {
@@ -80,11 +83,11 @@ public class searchResultsActivity extends AppCompatActivity  {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 upload upload_item = data1.get(i);
                 if(upload_item.type == Constants.IMG_UPLOAD_CATEGORY){
-                    Intent intent = new Intent(searchResultsActivity.this,img_activity.class);
+                    Intent intent = new Intent(searchResultsActivity.this, img_activity.class);
                     intent.putExtra("key",upload_item);
                     startActivity(intent);
                 } else {
-                    Intent intent = new Intent(searchResultsActivity.this,pdf_activity.class);
+                    Intent intent = new Intent(searchResultsActivity.this, pdf_activity.class);
                     intent.putExtra("key",upload_item);
                     startActivity(intent);
                 }

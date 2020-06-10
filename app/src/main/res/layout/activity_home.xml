@@ -7,7 +7,7 @@
     android:padding="15dp"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".HomeActivity">
+    tools:context=".Activities.HomeActivity">
 
     <TextView
         android:layout_width="match_parent"

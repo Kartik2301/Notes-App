@@ -1,4 +1,4 @@
-package com.example.android.notesapp;
+package com.example.android.notesapp.Classes;
 
 import java.util.ArrayList;
 

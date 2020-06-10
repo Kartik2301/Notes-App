@@ -1,15 +1,15 @@
-package com.example.android.notesapp;
+package com.example.android.notesapp.Classes;
 
 import java.io.Serializable;
 
 public class upload implements Serializable {
-    String id;
-    String title;
-    String description;
-    String url;
-    int type;
-    int likes;
-    String date;
+    public String id;
+    public String title;
+    public String description;
+    public String url;
+    public int type;
+    public int likes;
+    public String date;
 
     public upload() {
     }
