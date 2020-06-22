@@ -3,9 +3,13 @@ package com.example.android.notesapp.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,20 +33,21 @@ import java.util.ArrayList;
 
 public class pdf_activity extends AppCompatActivity {
 
-    Button button;
+    ImageButton button;
     TextView topic,desc;
     ImageButton like;
     ImageButton addComment;
+    final ArrayList<comments> Com = new ArrayList<>();
     ListView l;
     EditText editText;
-
+    upload this_item;
     DatabaseReference mDatabaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pdf_activity);
-        final upload this_item = (upload) getIntent().getSerializableExtra("key");
-        button = (Button) findViewById(R.id.btn);
+        this_item = (upload) getIntent().getSerializableExtra("key");
+        button = (ImageButton) findViewById(R.id.btn);
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("comments");
         topic = (TextView) findViewById(R.id.topic);
         desc = (TextView) findViewById(R.id.desc);
@@ -95,6 +100,25 @@ public class pdf_activity extends AppCompatActivity {
 
             }
         });
+
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Com.clear();
+                for(DataSnapshot d: dataSnapshot.getChildren()){
+                    comments cd = d.getValue(comments.class);
+                    if(cd.getId().equals(this_item.getId())){
+                        Com.add(new comments(cd.getAuthor(),cd.getContent(),cd.getId()));
+                    }
+                }
+                commentAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,5 +127,39 @@ public class pdf_activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.another_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { switch(item.getItemId()) {
+        case R.id.add:
+            displayAlert(Com);
+        case R.id.share:
+            shareLink();
+            return(true);
+
+    }
+        return(super.onOptionsItemSelected(item));
+    }
+    private void displayAlert(ArrayList<comments> d){
+        AlertDialog.Builder myDialog = new AlertDialog.Builder(pdf_activity.this);
+        LayoutInflater inflater = LayoutInflater.from(pdf_activity.this);
+        View view = inflater.inflate(R.layout.custom,null);
+        final ListView listView = view.findViewById(R.id.l_v);
+        final CommentAdapter commentAdapter1 = new CommentAdapter(this,R.layout.comment_item,d);
+        listView.setAdapter(commentAdapter1);
+        myDialog.setView(view);
+        myDialog.show();
+    }
+    private void shareLink() {
+        Intent shareIntent =   new Intent(android.content.Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT ,this_item.getTitle().toString());
+        String app_url = this_item.getUrl();
+        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,app_url);
+        startActivity(Intent.createChooser(shareIntent, "Share via"));
     }
 }

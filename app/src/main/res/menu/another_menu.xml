@@ -4,5 +4,6 @@
 
     <item
         android:id="@+id/add" android:icon="@android:drawable/ic_menu_add" app:showAsAction="always"   android:title="add"/>
-
+    <item
+        android:id="@+id/share" android:icon="@android:drawable/ic_menu_share" app:showAsAction="always"   android:title="add"/>
 </menu>

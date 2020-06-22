@@ -84,6 +84,8 @@ public class UploadActivity extends AppCompatActivity {
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
                 user updated_user = new user(Constants.username,Constants.points+10,Constants.rank,Constants.default_img_url);
                 databaseReference.child(Constants.id).setValue(updated_user);
+                title.getText().clear();
+                description.getText().clear();
                 Toast.makeText(getApplicationContext(),"Thanks for your help", Toast.LENGTH_SHORT).show();
             }
         });

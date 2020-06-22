@@ -10,11 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.android.notesapp.Classes.data_item;
+import com.example.android.notesapp.Classes.upload;
 import com.example.android.notesapp.R;
 
 import java.util.List;
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> {
-    private List<data_item> moviesList;
+    private List<upload> moviesList;
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView title, year, genre;
         ImageView imageView;
@@ -24,7 +25,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> 
             imageView = view.findViewById(R.id.head);
         }
     }
-    public DataAdapter(List<data_item> moviesList) {
+    public DataAdapter(List<upload> moviesList) {
         this.moviesList = moviesList;
     }
     @NonNull
@@ -36,10 +37,10 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> 
     }
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        data_item movie = moviesList.get(position);
-        holder.title.setText(movie.getString());
+        upload movie = moviesList.get(position);
+        holder.title.setText(movie.getTitle());
         Glide.with(holder.imageView.getContext())
-                .load(movie.getImageId())
+                .load(movie.getUrl())
                 .into(holder.imageView);
     }
     @Override

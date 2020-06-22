@@ -57,8 +57,9 @@ public class img_activity extends AppCompatActivity {
     String title1 = "";
     EditText editText;
     DatabaseReference mDatabaseReference;
-    TextView tv;
+    TextView tv, topic, desc;
     ListView l;
+    upload this_item;
     final ArrayList<comments> Com = new ArrayList<>();
 
 
@@ -68,15 +69,18 @@ public class img_activity extends AppCompatActivity {
         setContentView(R.layout.activity_img_activity);
         l = (ListView) findViewById(R.id.comments);
         editText = (EditText) findViewById(R.id.toSearch);
+        topic = (TextView) findViewById(R.id.topic);
+        desc = (TextView) findViewById(R.id.desc);
 
         imageButton = (ImageButton) findViewById(R.id.btn);
         like = (ImageButton) findViewById(R.id.like);
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("comments");
         addComment = (ImageButton) findViewById(R.id.add_comment);
-        final upload this_item = (upload) getIntent().getSerializableExtra("key");
+         this_item = (upload) getIntent().getSerializableExtra("key");
         final CommentAdapter commentAdapter = new CommentAdapter(this,R.layout.comment_item,Com);
         l.setAdapter(commentAdapter);
-
+        topic.setText(this_item.getTitle());
+        desc.setText(this_item.getDescription());
         addComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,6 +150,8 @@ public class img_activity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) { switch(item.getItemId()) {
         case R.id.add:
             displayAlert(Com);
+        case R.id.share:
+            shareLink();
             return(true);
 
     }
@@ -227,5 +233,13 @@ public class img_activity extends AppCompatActivity {
         listView.setAdapter(commentAdapter1);
         myDialog.setView(view);
         myDialog.show();
+    }
+    private void shareLink() {
+        Intent shareIntent =   new Intent(android.content.Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT ,this_item.getTitle().toString());
+        String app_url = this_item.getUrl();
+        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,app_url);
+        startActivity(Intent.createChooser(shareIntent, "Share via"));
     }
 }

@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.android.notesapp.Adapters.DataAdapter;
-import com.example.android.notesapp.Classes.data_item;
+import com.example.android.notesapp.Classes.SortingClass;
 import com.example.android.notesapp.Classes.upload;
 import com.example.android.notesapp.Classes.user;
 import com.example.android.notesapp.Constants.Constants;
@@ -52,6 +52,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     Button all, newest, rated;
     ImageButton search;
     FirebaseAuth firebaseAuth;
+    RecyclerView recyclerView;
+    ArrayList<upload> dup_list;
+    ArrayList<upload> arrayOfUsers;
+    DataAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +63,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_home);
         editText = (EditText) findViewById(R.id.toSearch);
         editText.setFocusableInTouchMode(true);
+        name = (TextView) findViewById(R.id.your_name);
+        search = (ImageButton) findViewById(R.id.search);
+        all = (Button) findViewById(R.id.tomain);
+        rated = (Button) findViewById(R.id.tomain1);
+        newest = (Button) findViewById(R.id.tomain2);
+        mStorageReference = FirebaseStorage.getInstance().getReference();
         firebaseAuth = FirebaseAuth.getInstance();
         profile = (ImageView) findViewById(R.id.profile);
-
+        dup_list = new ArrayList<>();
         logout = (TextView) findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +82,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        name = (TextView) findViewById(R.id.your_name);
+
         final DatabaseReference m = FirebaseDatabase.getInstance().getReference("users");
         m.addValueEventListener(new ValueEventListener() {
             @Override
@@ -94,9 +104,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-
-
-
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,7 +111,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
-        search = (ImageButton) findViewById(R.id.search);
+
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,26 +127,22 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-        mStorageReference = FirebaseStorage.getInstance().getReference();
+
 
         if(getSupportActionBar() != null){
             getSupportActionBar().hide();
         }
-        all = (Button) findViewById(R.id.tomain);
-        rated = (Button) findViewById(R.id.tomain1);
-        newest = (Button) findViewById(R.id.tomain2);
+
         all.setBackgroundResource(R.drawable.click);
-        rated.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setBackgrounds(rated,all,newest);
-            }
-        });
+
 
         newest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setBackgrounds(newest,all,rated);
+                SortingClass sortingClass = new SortingClass(dup_list);
+                ArrayList<upload> temp = sortingClass.sortByDate();
+                prepare_view(temp);
             }
         });
 
@@ -147,36 +150,26 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 setBackgrounds(all,rated,newest);
+                prepare_view(arrayOfUsers);
             }
         });
 
+        rated.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setBackgrounds(rated,all,newest);
+                SortingClass sortingClass = new SortingClass(dup_list);
+                ArrayList<upload> temp = sortingClass.sortByLikes();
+                prepare_view(temp);
+            }
+        });
         findViewById(R.id.upload_page).setOnClickListener(this);
-        final ArrayList<data_item> arrayOfUsers = new ArrayList<data_item>();
-        RecyclerView recyclerView = findViewById(R.id.lvItems);
+        arrayOfUsers = new ArrayList<upload>();
+        recyclerView = findViewById(R.id.lvItems);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
-        final DataAdapter adapter = new DataAdapter(arrayOfUsers);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference("entries");
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                arrayOfUsers.clear();
-                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
-                    upload upload_ = dataSnapshot1.getValue(upload.class);
-                    if(upload_.type == Constants.IMG_UPLOAD_CATEGORY){
-                        arrayOfUsers.add(new data_item(upload_.title,upload_.url));
-                    }
-                }
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        prepare_view(arrayOfUsers);
+        getData();
 
     }
 
@@ -201,4 +194,34 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
          non1.setBackgroundResource(R.drawable.shape);
          non2.setBackgroundResource(R.drawable.shape);
     }
+
+    public void getData() {
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("entries");
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                arrayOfUsers.clear();
+                dup_list.clear();
+                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                    upload upload_ = dataSnapshot1.getValue(upload.class);
+                    if(upload_.type == Constants.IMG_UPLOAD_CATEGORY){
+                        arrayOfUsers.add(upload_);
+                        dup_list.add(upload_);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void prepare_view(ArrayList<upload> show) {
+        adapter  = new DataAdapter(show);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+    }
 }
+

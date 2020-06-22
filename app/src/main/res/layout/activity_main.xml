@@ -5,17 +5,18 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
+    android:background="#32363C"
     android:padding="20dp"
     tools:context=".Activities.MainActivity">
 
-    <Button
+
+    <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn"
-        android:text="Intent">
-
-    </Button>
-
+        android:layout_height="420dp"
+        android:id="@+id/launch"
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/launchg">
+    </ImageView>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

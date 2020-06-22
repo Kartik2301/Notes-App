@@ -16,20 +16,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.android.notesapp.Classes.SortingClass;
+import com.example.android.notesapp.Classes.upload;
 import com.example.android.notesapp.Classes.user;
 import com.example.android.notesapp.Constants.Constants;
 import com.example.android.notesapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class profileActivity extends AppCompatActivity {
 
@@ -37,17 +45,25 @@ public class profileActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     Button logOut;
     ImageView dp;
-    TextView rank, points;
+    TextView rank, points, lead;
+    DatabaseReference mDatabaseReference;
+    ArrayList<user> arrayOfUsers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         final user user_content = (user) getIntent().getSerializableExtra("user_object");
-        rank = (TextView) findViewById(R.id.rank);
+        arrayOfUsers = new ArrayList<user>();
         points = (TextView) findViewById(R.id.points);
-        rank.setText(Integer.toString(Constants.rank).trim()+" ");
         points.setText(Integer.toString(Constants.points)+" ");
         firebaseAuth = FirebaseAuth.getInstance();
+        lead = (TextView) findViewById(R.id.open_leader);
+        lead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(profileActivity.this, LeaderBoardActivity.class));
+            }
+        });
         dp = (ImageView) findViewById(R.id.dp);
         Glide.with(dp)
                 .load(Constants.default_img_url)
@@ -130,5 +146,13 @@ public class profileActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+}
+
+class compareClass implements Comparator<user> {
+
+    @Override
+    public int compare(user a, user b) {
+        return a.getPoints() - b.getPoints();
     }
 }

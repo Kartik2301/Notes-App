@@ -121,22 +121,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:textStyle="bold"
+                android:textStyle="italic"
                 android:textSize="20sp"
-                android:text="Leaderboard Rank:"/>
+                android:id="@+id/open_leader"
+                android:text="See Leaderboard"/>
 
-            <TextView
-                android:id="@+id/rank"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="0dp"
-                android:fontFamily="@font/ubuntu"
-                android:text="#15"
-                android:textColor="#414F7D"
-                android:textSize="18sp"
-                android:textStyle="italic" />
         </RelativeLayout>
     </LinearLayout>
 
