@@ -70,6 +70,10 @@ public class UploadActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String topic = title.getText().toString();
                 String desc = description.getText().toString();
+                if(topic.length() == 0  || desc.length() == 0) {
+                    Toast.makeText(getApplicationContext(), "None of the fields should be empty", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 if(is_img_upload == 1){
                     String id = mDatabaseReference.push().getKey();
                     String date = DateFormat.getDateInstance().format(new Date());

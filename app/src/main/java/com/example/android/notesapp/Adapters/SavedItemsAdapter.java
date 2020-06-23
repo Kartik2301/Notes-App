@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.example.android.notesapp.Activities.display_image;
+import com.example.android.notesapp.Activities.display_pdf;
 import com.example.android.notesapp.Classes.saved_items;
 import com.example.android.notesapp.Classes.upload;
 import com.example.android.notesapp.Data.DataContract;
@@ -27,7 +28,7 @@ import java.util.List;
 
 public class SavedItemsAdapter extends  ArrayAdapter{
     ArrayList<saved_items> list = new ArrayList<>();
-
+    private int PDF_SELECTION_CODE = 99;
     public SavedItemsAdapter(Context context, int textViewResourceId, ArrayList<saved_items> objects) {
         super(context, textViewResourceId, objects);
         list = objects;
@@ -63,14 +64,21 @@ public class SavedItemsAdapter extends  ArrayAdapter{
         textView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), display_image.class);
-                intent.putExtra("key",target);
-                getContext().startActivity(intent);
+                if(!target.contains("firebase")) {
+                    Intent intent = new Intent(getContext(), display_image.class);
+                    intent.putExtra("key",target);
+                    getContext().startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getContext(), display_pdf.class);
+                    getContext().startActivity(intent);
+                }
             }
         });
         textView.setText(list.get(position).getTopic());
 
         return v;
 
+
     }
+
 }
