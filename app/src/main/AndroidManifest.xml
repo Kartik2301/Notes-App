@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateHidden|adjustPan|adjustResize">
-        <activity android:name=".Activities.LeaderBoardActivity"></activity>
+        <activity android:name=".Activities.SavedItems"></activity>
+        <activity android:name=".Activities.LeaderBoardActivity" />
         <activity android:name=".Activities.profileActivity" />
         <activity android:name=".Activities.signInActivity" />
         <activity android:name=".Activities.signUpActivity" />
@@ -40,8 +41,8 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

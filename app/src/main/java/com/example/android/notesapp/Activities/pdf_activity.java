@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,6 +24,8 @@ import com.example.android.notesapp.Adapters.CommentAdapter;
 import com.example.android.notesapp.Classes.comments;
 import com.example.android.notesapp.Classes.upload;
 import com.example.android.notesapp.Constants.Constants;
+import com.example.android.notesapp.Data.DataContract;
+import com.example.android.notesapp.Data.DataDBHelper;
 import com.example.android.notesapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -124,6 +128,12 @@ public class pdf_activity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(this_item.url));
+                DataDBHelper dataDBHelper = new DataDBHelper(getApplicationContext());
+                SQLiteDatabase sqLiteDatabase = dataDBHelper.getWritableDatabase();
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(DataContract.DataEntry.COLUMN_ENTITY_URL, this_item.getUrl());
+                contentValues.put(DataContract.DataEntry.COLUMN_TOPIC_NAME, this_item.getTitle());
+                long new_id = sqLiteDatabase.insert(DataContract.DataEntry.TABLE_NAME, null, contentValues);
                 startActivity(intent);
             }
         });
@@ -137,6 +147,7 @@ public class pdf_activity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) { switch(item.getItemId()) {
         case R.id.add:
             displayAlert(Com);
+            return true;
         case R.id.share:
             shareLink();
             return(true);

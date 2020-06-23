@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -29,6 +31,8 @@ import com.example.android.notesapp.Adapters.CommentAdapter;
 import com.example.android.notesapp.Classes.comments;
 import com.example.android.notesapp.Classes.upload;
 import com.example.android.notesapp.Constants.Constants;
+import com.example.android.notesapp.Data.DataContract;
+import com.example.android.notesapp.Data.DataDBHelper;
 import com.example.android.notesapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -150,6 +154,7 @@ public class img_activity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) { switch(item.getItemId()) {
         case R.id.add:
             displayAlert(Com);
+            return true;
         case R.id.share:
             shareLink();
             return(true);
@@ -187,6 +192,12 @@ public class img_activity extends AppCompatActivity {
 
             if(result!=null){
                 Uri imageInternalUri = saveImageToInternalStorage(result);
+                DataDBHelper dataDBHelper = new DataDBHelper(getApplicationContext());
+                SQLiteDatabase sqLiteDatabase = dataDBHelper.getWritableDatabase();
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(DataContract.DataEntry.COLUMN_ENTITY_URL, imageInternalUri.toString());
+                contentValues.put(DataContract.DataEntry.COLUMN_TOPIC_NAME, this_item.getTitle());
+                long generated_ID = sqLiteDatabase.insert(DataContract.DataEntry.TABLE_NAME, null, contentValues);
                 Intent intent = new Intent(img_activity.this,display_image.class);
                 intent.putExtra("key",imageInternalUri.toString());
                 startActivity(intent);

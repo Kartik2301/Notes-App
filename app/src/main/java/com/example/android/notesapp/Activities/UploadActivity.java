@@ -221,7 +221,6 @@ public class UploadActivity extends AppCompatActivity {
                         }
                     })
                     .show();
-            Toast.makeText(getApplicationContext(),"hello",Toast.LENGTH_SHORT).show();
             return(true);
 
     }
