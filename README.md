@@ -23,7 +23,7 @@
  </span>
 
 <span>
-  <img src="https://github.com/Kartik2301/data/blob/master/img_Ac.png" width="300" height="500">
+  <img src="https://github.com/Kartik2301/data/blob/master/img.png" width="300" height="500">
 <img src="https://github.com/Kartik2301/data/blob/master/Comments.png" width="300" height="500">
 <img src="https://github.com/Kartik2301/data/blob/master/SavedItems.png" width="300" height="500">
 
