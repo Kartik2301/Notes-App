@@ -1,2 +1,2 @@
 # Notes-App
-![images](https://github.com/Kartik2301/Notes-App/blob/master/app/src/main/res/drawable/comments.png)
+<img src="https://github.com/Kartik2301/Notes-App/blob/master/app/src/main/res/drawable/comments.png" width="300" height="500">
