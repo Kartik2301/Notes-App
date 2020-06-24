@@ -173,6 +173,6 @@ class compareClass implements Comparator<user> {
 
     @Override
     public int compare(user a, user b) {
-        return a.getPoints() - b.getPoints();
+        return b.getPoints() - a.getPoints();
     }
 }

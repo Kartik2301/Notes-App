@@ -16,7 +16,8 @@
         <activity android:name=".Activities.display_pdf" />
         <activity android:name=".Activities.SavedItems"
             android:parentActivityName=".Activities.profileActivity"/>
-        <activity android:name=".Activities.LeaderBoardActivity" />
+        <activity android:name=".Activities.LeaderBoardActivity"
+            android:parentActivityName=".Activities.profileActivity"/>
         <activity android:name=".Activities.profileActivity" />
         <activity android:name=".Activities.signInActivity" />
         <activity android:name=".Activities.signUpActivity" />
