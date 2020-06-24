@@ -13,19 +13,19 @@
  <li>Notes facility</li>
 </ul>
 <span>
- <img src="https://drive.google.com/file/d/1efLfbnBTp4thfCUMQwKApVFn_PFL4zFR/view?usp=sharing" width="300" height="500">
-<img src="https://drive.google.com/file/d/1jjzI2MuPqBgaesGjnRYQ42vV3a1Qqsyl/view?usp=sharing" width="300" height="500">
+ <img src="https://github.com/Kartik2301/data/blob/master/Home.png" width="300" height="500">
+<img src="https://github.com/Kartik2301/data/blob/master/searchImg.png" width="300" height="500">
 </span>
 
 <span>
-  <img src="https://drive.google.com/file/d/1jjzI2MuPqBgaesGjnRYQ42vV3a1Qqsyl/view?usp=sharing" width="300" height="500">
-<img src="https://drive.google.com/file/d/1jjzI2MuPqBgaesGjnRYQ42vV3a1Qqsyl/view?usp=sharing" width="300" height="500">
+  <img src="https://github.com/Kartik2301/data/blob/master/searchPdf.png" width="300" height="500">
+<img src="https://github.com/Kartik2301/data/blob/master/notesPage.png" width="300" height="500">
  </span>
 
 <span>
-  <img src="https://drive.google.com/file/d/19oRebKop4NbOkz6qP5Y9wCpwPZ5RufOP/view?usp=sharing" width="300" height="500">
-<img src="https://drive.google.com/file/d/1Ghvv7fwDg-M2DYdQ1wN0JqOTfgw_LbbX/view?usp=sharing" width="300" height="500">
-<img src="https://drive.google.com/file/d/1EeP-sVoTOII9mMVegPEm8lO9QV8rhx_6/view?usp=sharing" width="300" height="500">
+  <img src="https://github.com/Kartik2301/data/blob/master/img_Ac.png" width="300" height="500">
+<img src="https://github.com/Kartik2301/data/blob/master/Comments.png" width="300" height="500">
+<img src="https://github.com/Kartik2301/data/blob/master/SavedItems.png" width="300" height="500">
 
  </span>
 
