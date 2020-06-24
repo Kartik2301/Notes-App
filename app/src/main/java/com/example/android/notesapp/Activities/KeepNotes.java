@@ -56,7 +56,6 @@ public class KeepNotes extends AppCompatActivity {
                 long newNoteId = sqLiteDatabase.insert(NoteContract.NoteEntry.TABLE_NAME, null, contentValues);
                 list.add(0, new Note(c,newNoteId));
                 adapter.notifyDataSetChanged();
-                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
             }
         });
         String [] projection = {
@@ -81,59 +80,64 @@ public class KeepNotes extends AppCompatActivity {
             list.add(0,new Note(content, ID));
         }
 
-        list.add(new Note("gggdf",5L));
-        list.add(new Note("gggdf",5L));
-        list.add(new Note("gggdf",5L));list.add(new Note("gggdf",5L));
-        list.add(new Note("gggdf",5L));
-        list.add(new Note("gggdf",5L));list.add(new Note("gggdf",5L));
+
+        list.add(new Note("Add Notes",-5L));
+        list.add(new Note("Easy management",-5L));
+        list.add(new Note("Easy Insert",-5L));
+        list.add(new Note("Easy UI",-5L));
+        list.add(new Note("Delting notes simplified",-5L));
+        list.add(new Note("Updates possible",-5L));
+        list.add(new Note("Get Started",-5L));
         gridView.setAdapter(adapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                final AlertDialog builder = new AlertDialog.Builder(KeepNotes.this).create();
-                LayoutInflater layoutInflater = LayoutInflater.from(KeepNotes.this);
-                View Iview = layoutInflater.inflate(R.layout.custom_for_notes, null);
-                final EditText editText = (EditText) Iview.findViewById(R.id.content);
-                ImageButton delete = (ImageButton) Iview.findViewById(R.id.delete);
-                ImageButton done = (ImageButton) Iview.findViewById(R.id.done);
-                final int position = i;
-                done.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String new_text = editText.getText().toString();
-                        sqLiteDatabase = noteDBHelper.getWritableDatabase();
-                        ContentValues contentValues = new ContentValues();
-                        contentValues.put(NoteContract.NoteEntry.COLUMN_NOTE_CONTENT, new_text);
-                        String selection = selection = NoteContract.NoteEntry._ID + "=?";
-                        String[] selectionArgs = {String.valueOf(list.get(position).getID())};
-                        int count = sqLiteDatabase.update(
-                                NoteContract.NoteEntry.TABLE_NAME,
-                                contentValues,
-                                selection,
-                                selectionArgs
-                        );
-                        long reqID = list.get(position).getID();
-                        list.set(position, new Note(new_text, reqID));
-                        adapter.notifyDataSetChanged();
-                        builder.dismiss();
-                    }
-                });
-                delete.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String selection = NoteContract.NoteEntry._ID + "=?";
-                        String[] selectionArgs = {String.valueOf(list.get(position).getID())};
-                        int deletedRows = sqLiteDatabase.delete(NoteContract.NoteEntry.TABLE_NAME, selection, selectionArgs);
-                        list.remove(position);
-                        builder.dismiss();
-                        adapter.notifyDataSetChanged();
+                if(list.get(i).getID() != -5L) {
+                    final AlertDialog builder = new AlertDialog.Builder(KeepNotes.this).create();
+                    LayoutInflater layoutInflater = LayoutInflater.from(KeepNotes.this);
+                    View Iview = layoutInflater.inflate(R.layout.custom_for_notes, null);
+                    final EditText editText = (EditText) Iview.findViewById(R.id.content);
+                    ImageButton delete = (ImageButton) Iview.findViewById(R.id.delete);
+                    ImageButton done = (ImageButton) Iview.findViewById(R.id.done);
+                    final int position = i;
+                    done.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String new_text = editText.getText().toString();
+                            sqLiteDatabase = noteDBHelper.getWritableDatabase();
+                            ContentValues contentValues = new ContentValues();
+                            contentValues.put(NoteContract.NoteEntry.COLUMN_NOTE_CONTENT, new_text);
+                            String selection = selection = NoteContract.NoteEntry._ID + "=?";
+                            String[] selectionArgs = {String.valueOf(list.get(position).getID())};
+                            int count = sqLiteDatabase.update(
+                                    NoteContract.NoteEntry.TABLE_NAME,
+                                    contentValues,
+                                    selection,
+                                    selectionArgs
+                            );
+                            long reqID = list.get(position).getID();
+                            list.set(position, new Note(new_text, reqID));
+                            adapter.notifyDataSetChanged();
+                            builder.dismiss();
+                        }
+                    });
+                    delete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String selection = NoteContract.NoteEntry._ID + "=?";
+                            String[] selectionArgs = {String.valueOf(list.get(position).getID())};
+                            int deletedRows = sqLiteDatabase.delete(NoteContract.NoteEntry.TABLE_NAME, selection, selectionArgs);
+                            list.remove(position);
+                            builder.dismiss();
+                            adapter.notifyDataSetChanged();
 
-                    }
-                });
-                editText.setText(list.get(i).getBody());
-                builder.setView(Iview);
-                builder.show();
+                        }
+                    });
+                    editText.setText(list.get(i).getBody());
+                    builder.setView(Iview);
+                    builder.show();
+                }
             }
         });
     }

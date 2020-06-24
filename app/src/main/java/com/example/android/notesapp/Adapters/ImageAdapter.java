@@ -1,12 +1,14 @@
 package com.example.android.notesapp.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,6 +41,11 @@ public class ImageAdapter extends  ArrayAdapter{
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.note_item, null);
         TextView textView = (TextView) v.findViewById(R.id.SingleView);
+        RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.relative);
+        if(list.get(position).getID() == -5L) {
+            relativeLayout.setBackgroundColor(Color.parseColor("#aacfcf"));
+        }
+
         textView.setText(list.get(position).getBody());
         return v;
     }

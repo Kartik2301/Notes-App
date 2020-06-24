@@ -14,7 +14,8 @@
             android:parentActivityName=".Activities.profileActivity"
             android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".Activities.display_pdf" />
-        <activity android:name=".Activities.SavedItems" />
+        <activity android:name=".Activities.SavedItems"
+            android:parentActivityName=".Activities.profileActivity"/>
         <activity android:name=".Activities.LeaderBoardActivity" />
         <activity android:name=".Activities.profileActivity" />
         <activity android:name=".Activities.signInActivity" />

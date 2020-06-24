@@ -208,7 +208,7 @@ public class UploadActivity extends AppCompatActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        getMenuInflater().inflate(R.menu.upload_menu, menu);
         return true;
     }
     @Override
