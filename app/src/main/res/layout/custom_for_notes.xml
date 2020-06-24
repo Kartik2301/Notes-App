@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="15sp"
+        android:id="@+id/content"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/allerta"
+        android:text="Whatever be the content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/content"
+            android:id="@+id/delete"
+            android:src="@drawable/ic_action_delete_item_red"
+            android:background="@null"
+            android:layout_marginRight="40dp"
+            android:layout_alignParentStart="true"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/content"
+            android:id="@+id/done"
+            android:src="@drawable/ic_action_delete_item_new"
+            android:background="@null"
+            android:layout_alignParentStart="true"/>
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

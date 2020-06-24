@@ -5,4 +5,8 @@
     <item
         android:id="@+id/saved_items" android:icon="@android:drawable/ic_menu_save" app:showAsAction="always" android:title="about">
     </item>
+
+    <item
+        android:id="@+id/notes" android:icon="@android:drawable/ic_menu_agenda" app:showAsAction="always" android:title="about">
+    </item>
 </menu>

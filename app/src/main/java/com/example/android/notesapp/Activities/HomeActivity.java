@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -35,7 +37,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener, DataAdapter.onDataElementClickListener{
 
     final static int PICK_PDF_CODE = 2342;
 
@@ -136,6 +138,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         all.setBackgroundResource(R.drawable.click);
 
 
+
         newest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -218,10 +221,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
+
     public void prepare_view(ArrayList<upload> show) {
-        adapter  = new DataAdapter(show);
+        adapter  = new DataAdapter(show,this);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onDataItemClick(int position) {
+        Intent intent = new Intent(HomeActivity.this, img_activity.class);
+        intent.putExtra("key",arrayOfUsers.get(position));
+        startActivity(intent);
     }
 }
 

@@ -16,16 +16,34 @@ import com.example.android.notesapp.R;
 import java.util.List;
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> {
     private List<upload> moviesList;
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    private onDataElementClickListener onDataElementClickListener_;
+
+
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView title, year, genre;
         ImageView imageView;
-        MyViewHolder(View view) {
+
+        onDataElementClickListener onDataElementClickListener;
+        MyViewHolder(View view, onDataElementClickListener onDataElementClickListener1) {
             super(view);
             title = view.findViewById(R.id.tvName);
             imageView = view.findViewById(R.id.head);
+            view.setOnClickListener(this);
+            onDataElementClickListener = onDataElementClickListener1;
+        }
+
+        @Override
+        public void onClick(View view) {
+            onDataElementClickListener.onDataItemClick(getAdapterPosition());
         }
     }
-    public DataAdapter(List<upload> moviesList) {
+
+
+    public interface onDataElementClickListener {
+        void onDataItemClick(int position);
+    }
+    public DataAdapter(List<upload> moviesList, onDataElementClickListener onDataElementClickListener12) {
+        onDataElementClickListener_ = onDataElementClickListener12;
         this.moviesList = moviesList;
     }
     @NonNull
@@ -33,7 +51,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> 
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item, parent, false);
-        return new MyViewHolder(itemView);
+        return new MyViewHolder(itemView, onDataElementClickListener_);
     }
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
@@ -47,4 +65,5 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyViewHolder> 
     public int getItemCount() {
         return moviesList.size();
     }
+
 }

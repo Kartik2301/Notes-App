@@ -161,6 +161,9 @@ public class profileActivity extends AppCompatActivity {
             case R.id.saved_items :
                 startActivity(new Intent(profileActivity.this, SavedItems.class));
                 return true;
+            case R.id.notes :
+                startActivity(new Intent(profileActivity.this, KeepNotes.class));
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

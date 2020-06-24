@@ -87,6 +87,9 @@ public class searchResultsActivity extends AppCompatActivity  {
                     intent.putExtra("key",upload_item);
                     startActivity(intent);
                 } else {
+                    Intent intent = new Intent(searchResultsActivity.this, pdf_activity.class);
+                    intent.putExtra("key",upload_item);
+                    startActivity(intent);
                 }
             }
         });
