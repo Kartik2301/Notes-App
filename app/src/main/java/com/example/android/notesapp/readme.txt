@@ -11,3 +11,4 @@ Features
 9. Database deletions
 10. Upload images and pdf
 11. Topic, descriptions etc.
+12. Notes facility
