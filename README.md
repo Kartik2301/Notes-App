@@ -12,20 +12,4 @@
  <li>Topic, descriptions etc.</li>
  <li>Notes facility</li>
 </ul>
-<span>
- <img src="https://github.com/Kartik2301/data/blob/master/Home.png" width="300" height="500">
-<img src="https://github.com/Kartik2301/data/blob/master/searchImg.png" width="300" height="500">
-</span>
-
-<span>
-  <img src="https://github.com/Kartik2301/data/blob/master/searchPdf.png" width="300" height="500">
-<img src="https://github.com/Kartik2301/data/blob/master/notesPage.png" width="300" height="500">
- </span>
-
-<span>
-  <img src="https://github.com/Kartik2301/data/blob/master/img.png" width="300" height="500">
-<img src="https://github.com/Kartik2301/data/blob/master/Comments.png" width="300" height="500">
-<img src="https://github.com/Kartik2301/data/blob/master/SavedItems.png" width="300" height="500">
-
- </span>
 
